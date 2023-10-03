@@ -2,17 +2,21 @@
 import React, { useState } from 'react';
 import { LoadingButton } from './LoadingButton';
 import { InputField } from './InputField';
+import { loginUser } from '../utils/Auth';
+
 
 export function LoginForm() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string | null>(null);
-
     const handleLogin = async () => {
-        console.log('Email:', email);
-        console.log('Senha:', password);
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        setMessage('Login realizado com sucesso!');
+        try {
+            const data = await loginUser(email);
+            console.log(data);
+            setMessage('Login realizado com sucesso!');
+        } catch (error) {
+            console.error("Error searching user:", error);
+        }
     };
 
     return (
