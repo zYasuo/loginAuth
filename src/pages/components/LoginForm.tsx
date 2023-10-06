@@ -11,7 +11,7 @@ export function LoginForm() {
     const [message, setMessage] = useState<string | null>(null);
     const handleLogin = async () => {
         try {
-            const data = await loginUser(email);
+            const data = await loginUser(email, password);
             console.log(data);
             setMessage('Login realizado com sucesso!');
         } catch (error) {
